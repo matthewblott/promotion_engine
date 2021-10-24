@@ -6,5 +6,8 @@ namespace PromotionEngine.Domain
   {
     public int Id { get; set; }
     public IList<Product> Products { get; set; }
+    
+    public decimal Discount { get; set; }
+    
   }
 }
