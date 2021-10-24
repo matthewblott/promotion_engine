@@ -1,5 +1,6 @@
 ﻿namespace PromotionEngine.Console
 {
+  using System;
   using System.Threading.Tasks;
   using Domain;
   using Jering.Javascript.NodeJS;
@@ -25,10 +26,16 @@
         Id = 1,
         Products = productService.Products
       };
+
+      // order.Products.Add(new Product{ Sku = "A", Price = 50.00M,});
+      // order.Products.Add(new Product{ Sku = "A", Price = 50.00M,});
       
       orderService.Add(order);
-      orderService.ApplyDiscount(order);
-
+      
+      await orderService.ApplyDiscount(order);
+      
+      Console.WriteLine($"Discount: {order.Discount}");
+      
     }
     
   }

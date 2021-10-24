@@ -4,6 +4,7 @@ namespace PromotionEngine.Services
   using System.Collections.Generic;
   using System.IO;
   using System.Linq;
+  using System.Text.Json;
   using System.Threading.Tasks;
   using Domain;
   using Jering.Javascript.NodeJS;
@@ -24,24 +25,46 @@ namespace PromotionEngine.Services
 
     public async Task ApplyDiscount(Order order)
     {
-      var path = Path.Combine("Scripts", "promotions.js");
+      var path = Path.Combine(AppContext.BaseDirectory, "Scripts", "promotions.js");
+      
+      // Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
       
       var kvp = order.Products
         .Select(x=> new KeyValuePair<string, decimal>(x.Sku, x.Price))
         .ToList();
 
       var combinations = UniquePairingCombinations(kvp);
+
+      var discounts = new List<decimal>();
       
       foreach (var combination in combinations)
       {
-        var result0 = await _nodeService 
-          .InvokeFromFileAsync<object>(path, "discountC", args: new object[] { combination });
+        var resultA = await _nodeService 
+          .InvokeFromFileAsync<JsonElement>(path, "discountA", args: new object[] { combination });
 
-        // Console.WriteLine(result0);
+        var a = resultA.GetDecimal();
+          
+        discounts.Add(a);
+        
+        var resultB = await _nodeService 
+          .InvokeFromFileAsync<JsonElement>(path, "discountB", args: new object[] { combination });
+
+        var b = resultB.GetDecimal();
+        
+        discounts.Add(b);
+
+        var resultC = await _nodeService 
+          .InvokeFromFileAsync<JsonElement>(path, "discountC", args: new object[] { combination });
+
+        var c = resultC.GetDecimal();
+        
+        discounts.Add(c);
         
       }
 
-      order.Discount = 0;
+      var max = discounts.Max();
+      
+      order.Discount = max;
 
     }
    

@@ -1,6 +1,7 @@
 namespace PromotionEngine.Services
 {
   using System.Collections.Generic;
+  using System.Runtime.InteropServices;
   using System.Threading.Tasks;
   using Domain;
   using Jering.Javascript.NodeJS;
