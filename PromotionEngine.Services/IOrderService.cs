@@ -1,7 +1,9 @@
 namespace PromotionEngine.Services
 {
   using System.Collections.Generic;
+  using System.Threading.Tasks;
   using Domain;
+  using Jering.Javascript.NodeJS;
 
   public interface IOrderService
   {
@@ -12,6 +14,8 @@ namespace PromotionEngine.Services
     void Remove(int id);
 
     Order GetById(int id);
+
+    Task ApplyDiscount(Order order);
 
   }
 
