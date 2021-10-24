@@ -27,8 +27,8 @@
         Products = productService.Products
       };
 
-      // order.Products.Add(new Product{ Sku = "A", Price = 50.00M,});
-      // order.Products.Add(new Product{ Sku = "A", Price = 50.00M,});
+      order.Products.Add(new Product{ Sku = "A", Price = 50.00M,});
+      order.Products.Add(new Product{ Sku = "A", Price = 50.00M,});
       
       orderService.Add(order);
       

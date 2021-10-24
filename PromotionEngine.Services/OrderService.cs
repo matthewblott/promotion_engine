@@ -25,7 +25,7 @@ namespace PromotionEngine.Services
 
     public async Task ApplyDiscount(Order order)
     {
-      var path = Path.Combine(AppContext.BaseDirectory, "Scripts", "promotions.js");
+      var path = Path.Combine(AppContext.BaseDirectory, "Scripts");
       
       // Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
       
@@ -36,29 +36,19 @@ namespace PromotionEngine.Services
       var combinations = UniquePairingCombinations(kvp);
 
       var discounts = new List<decimal>();
+
+      var files = Directory.GetFiles(path);
       
       foreach (var combination in combinations)
       {
-        var resultA = await _nodeService 
-          .InvokeFromFileAsync<JsonElement>(path, "discountA", args: new object[] { combination });
-
-        var a = resultA.GetDecimal();
+        foreach (var file in files)
+        {
+          var resultA = await _nodeService.InvokeFromFileAsync<JsonElement>(file, args: new object[] { combination });
+          var a = resultA.GetDecimal();
           
-        discounts.Add(a);
+          discounts.Add(a);
         
-        var resultB = await _nodeService 
-          .InvokeFromFileAsync<JsonElement>(path, "discountB", args: new object[] { combination });
-
-        var b = resultB.GetDecimal();
-        
-        discounts.Add(b);
-
-        var resultC = await _nodeService 
-          .InvokeFromFileAsync<JsonElement>(path, "discountC", args: new object[] { combination });
-
-        var c = resultC.GetDecimal();
-        
-        discounts.Add(c);
+        }
         
       }
 
