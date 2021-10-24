@@ -38,16 +38,26 @@ namespace PromotionEngine.Services
       var discounts = new List<decimal>();
 
       var files = Directory.GetFiles(path);
-      
+
       foreach (var combination in combinations)
       {
         foreach (var file in files)
         {
           var resultA = await _nodeService.InvokeFromFileAsync<JsonElement>(file, args: new object[] { combination });
           var a = resultA.GetDecimal();
+
+          if (a == decimal.Zero)
+          {
+            continue;
+          }
           
-          discounts.Add(a);
-        
+          var any = discounts.Any(d => d == a);
+
+          if (!any)
+          {
+            discounts.Add(a);
+          }
+
         }
         
       }

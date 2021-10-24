@@ -1,6 +1,8 @@
-module.exports = (callback, inputs) => {
-  let retVal = 0;
+// C & D for 30, discount 5
 
+module.exports = (callback, inputs) => {
+
+  let retVal = 0;
   let key1 = 'C';
   let key2 = 'D';
 
@@ -9,7 +11,6 @@ module.exports = (callback, inputs) => {
   if(i > 0) {
     retVal = i * 5;
   }
-
  
   callback(null, retVal);
   

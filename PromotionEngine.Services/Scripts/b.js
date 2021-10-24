@@ -1,8 +1,8 @@
-// 3 of A's for 130
+// 2 Bs for 45, discount 15
 
 module.exports = (callback, inputs) => {
+
   let retVal = 0;
-  
   let key = 'B';
   let i = inputs.filter(x => x.key === key).length;
 
