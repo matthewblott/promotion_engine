@@ -10,7 +10,7 @@ To run this project you'll need .NET 5.0 installed along with Node (which should
 To run the project execute the following:
 
 ```
-https://github.com/matthewblott/promotion_engine
+git clone https://github.com/matthewblott/promotion_engine
 
 cd promotion_engine
 
@@ -37,4 +37,4 @@ These are then run against the various promotions found in the ```Scripts``` fol
 
 ## Issues
 
-This is a proof of concept and is not the nmost efficient use of an algorithm. With hindsight the process of extracting the different combinations of products can run into thousands quickly and it would be better to check against the requirements in promotions. However this posed the challenge of making something easy and flexible when it comes to adding new promotions. This project is very flexible for promotions but work on more efficient sorting algorithms is required!
+This is a proof of concept and is not the most efficient use of an algorithm. With hindsight the process of extracting the different combinations of products can run into thousands quickly and it would be better to check against the requirements in promotions. However this posed the challenge of making something easy and flexible when it comes to adding new promotions. This project is very flexible for promotions but work on more efficient sorting algorithms is required!
